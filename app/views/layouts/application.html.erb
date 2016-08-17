@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ReactRailsToyApp</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>react-rails-toy-app</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= webpack_css_tag 'main.css' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%= yield %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
+  <%= webpack_manifest_script %>
+  <%= javascript_include_tag 'modernizr' %>
+  <%= webpack_js_tag 'main.js' %>
+  <%= javascript_include_tag 'application' %>
+</body>
 </html>
