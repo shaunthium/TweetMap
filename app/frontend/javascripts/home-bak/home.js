@@ -3,9 +3,16 @@ import React from 'react';
 import style from './style.css';
 
 class Home extends React.Component {
-  state: { text: string } = {
-    text: 'Click Me!',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: "Yhaha"
+    };
+  }
+
+  componentWillMount() {
+    // this.setState({text: "HAHA"})
+  }
 
   clickMeUpdate = () => {
     this.setState({
