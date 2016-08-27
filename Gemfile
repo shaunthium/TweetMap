@@ -78,3 +78,4 @@ end
 gem 'react-rails' # react jsx compile
 gem 'grape-entity'
 gem 'grape' # grape api
+gem 'twitter', '~> 5.16.0'
