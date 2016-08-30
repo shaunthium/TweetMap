@@ -10,11 +10,27 @@ class Textbox extends React.Component {
     this.setState({text: e.target.value});
   }
 
+  _sendData = () => {
+    // Post data
+    let url = '/api/v1/tweet/nearby_tweets';
+    let data = {
+      "q": this.state.text,
+      "longitude": "37.781157",
+      "latitude": "-122.398720",
+      "radius": 1,
+      "count": 3
+    };
+
+    $.post(url, data, function(data){
+      console.log('data', data);
+    });
+  }
+
   _onSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    // TODO: Submit logic here
 
+    this._sendData();
     // Change transparency
     this.props.toggleTransparency();
   }
