@@ -7,7 +7,7 @@ class Map extends React.Component {
     super(props);
     this.state = {
       transparent: true,
-      marker: {position: {lat: 37.0902, lng: -95.7129}}
+      marker: {}
     };
   }
 

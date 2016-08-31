@@ -1,8 +1,13 @@
 :local
+.front-most {
+  z-index: 999;
+}
+
+:local
 .container {
+  composes: front-most;
   position: absolute;
   left: 45%;
   top: 30%;
-  z-index: 999;
   opacity: 1;
 }
