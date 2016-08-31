@@ -16,11 +16,11 @@ class Textbox extends React.Component {
     // Post data
     let url = '/api/v1/tweet/nearby_tweets';
     let data = {
-      "q": this.state.text,
-      "longitude": "37.781157",
-      "latitude": "-122.398720",
-      "radius": 1,
-      "count": 3
+      q: this.state.text,
+      latitude: this.props.marker.position.lat,
+      longitude: this.props.marker.position.lng,
+      radius: 1,
+      count: 20
     };
 
     $.post(url, data, function(data){
@@ -50,6 +50,7 @@ class Textbox extends React.Component {
 }
 
 Textbox.propTypes = {
+  marker: React.PropTypes.object,
   setTransparency: React.PropTypes.func
 };
 

@@ -5,11 +5,19 @@ import Textbox from '../input/textbox.js';
 class Map extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {transparent: true};
+    this.state = {
+      transparent: true,
+      marker: {position: {lat: 37.0902, lng: -95.7129}}
+    };
   }
 
-  _setTransparency(transparent) {
-    this.setState({transparent});
+  _setTransparency = (transparent) => this.setState({transparent})
+
+  _onMapClicked = (event) => {
+    let lat = event.latLng.lat();
+    let lng = event.latLng.lng();
+
+    this.setState({marker: {position: {lat, lng}}});
   }
 
   render() {
@@ -20,21 +28,16 @@ class Map extends React.Component {
         opacity: (this.state.transparent ? '0.5' : '1')
       }}>
         <Textbox
-          setTransparency={this._setTransparency.bind(this)}/>
+          marker={this.state.marker}
+          setTransparency={this._setTransparency} />
         <GoogleMapLoader
-          containerElement={
-            <div
-              style={{
-                height: "100%",
-              }}
-            />
-          }
+          containerElement={<div style={{height: "100%"}} />}
           googleMapElement={
             <GoogleMap
-              defaultZoom={3}
+              defaultZoom={4}
               defaultCenter={{ lat: 37.0902, lng: -95.7129 }}
-              onClick={() => false}
-            >
+              onClick={this._onMapClicked} >
+              <Marker {...this.state.marker} />
             </GoogleMap>
           }
         />
