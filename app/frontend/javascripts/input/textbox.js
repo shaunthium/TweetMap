@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './main.css';
 
 class Textbox extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class Textbox extends React.Component {
 
   _onChange = (e) => {
     this.setState({text: e.target.value});
+    this.props.setTransparency(true);
   }
 
   _sendData = () => {
@@ -32,12 +34,12 @@ class Textbox extends React.Component {
 
     this._sendData();
     // Change transparency
-    this.props.toggleTransparency();
+    this.props.setTransparency(false);
   }
 
   render() {
     return (
-      <div style={{position: 'absolute', left: '45%', top: '30%', zIndex: '999', opacity: '1'}}>
+      <div className={`${styles.container}`}>
         <form onSubmit={this._onSubmit}>
           <input type="text" onChange={this._onChange}/>
           <button type='submit'>Submit</button>
@@ -48,7 +50,7 @@ class Textbox extends React.Component {
 }
 
 Textbox.propTypes = {
-  toggleTransparency: React.PropTypes.func
+  setTransparency: React.PropTypes.func
 };
 
 export default Textbox;

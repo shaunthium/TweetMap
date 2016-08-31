@@ -1,0 +1,8 @@
+:local
+.container {
+  position: absolute;
+  left: 45%;
+  top: 30%;
+  z-index: 999;
+  opacity: 1;
+}

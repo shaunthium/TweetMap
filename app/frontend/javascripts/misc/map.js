@@ -8,8 +8,8 @@ class Map extends React.Component {
     this.state = {transparent: true};
   }
 
-  _toggleTransparency() {
-    this.setState({transparent: !this.state.transparent});
+  _setTransparency(transparent) {
+    this.setState({transparent});
   }
 
   render() {
@@ -20,7 +20,7 @@ class Map extends React.Component {
         opacity: (this.state.transparent ? '0.5' : '1')
       }}>
         <Textbox
-          toggleTransparency={this._toggleTransparency.bind(this)}/>
+          setTransparency={this._setTransparency.bind(this)}/>
         <GoogleMapLoader
           containerElement={
             <div
