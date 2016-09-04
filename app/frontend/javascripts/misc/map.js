@@ -1,5 +1,5 @@
 import React from 'react';
-import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
+import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 import Textbox from '../input/textbox.js';
 
 class Map extends React.Component {
@@ -23,7 +23,8 @@ class Map extends React.Component {
   render() {
     return (
       <section style={{
-        height: '500px',
+        height: '100vh',
+        width: '100%',
         zIndex: '-999',
         opacity: (this.state.transparent ? '0.5' : '1')
       }}>

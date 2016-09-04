@@ -1,16 +1,18 @@
 import React from 'react';
 import styles from './main.css';
+import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 class Textbox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       text: '',
-      data: []
+      data: [],
+      showModal: false
     };
   }
 
-  _onChange = (e) => {
+  _onInputChange = (e) => {
     this.setState({text: e.target.value});
     this.props.setTransparency(true);
   }
@@ -27,49 +29,64 @@ class Textbox extends React.Component {
     };
 
     $.post(url, data, (data) => {
-      this.setState({data: JSON.parse(data)});
       console.log('data', data);
-      this.refs['modal-btn'].click();
+      this.setState({data: JSON.parse(data)});
+      this._openModal();
     });
+  }
+
+  _openModal = () => {
+    this.setState({showModal: true});
+  }
+
+  _closeModal = () => {
+    this.setState({showModal: false});
   }
 
   _onSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    this._sendData();
+    if ($.isEmptyObject(this.props.marker)) return;
     // Change transparency
     this.props.setTransparency(false);
+    this._sendData();
   }
 
   render() {
+    let tooltip = (
+      <Tooltip id="modal-tooltip">
+        {
+          $.isEmptyObject(this.props.marker) ?
+          "Please click on the map to drop a marker pin before clicking 'Submit'" :
+          "Enter your keyword here, and press the 'Submit' button (or just hit enter) to see the list of tweets!"
+        }
+      </Tooltip>
+    );
     return (
       <div className={`${styles.container}`}>
         <form onSubmit={this._onSubmit}>
-          <input type='text' onChange={this._onChange}/>
-          <button type='submit' className='btn btn-primary'>Submit</button>
-
-          <button type="button" className="btn btn-info btn-lg" ref='modal-btn' data-toggle="modal" data-target="#info" style={{visibility: 'hidden', display: 'none'}}></button>
-
-          <div id="info" className="modal fade" role="dialog">
-            <div className="modal-dialog">
-
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h4 className="modal-title">Results</h4>
-                </div>
-                <div className="modal-body">
-                  {
-                    this.state.data.map((obj, index) => {
-                      return <p>{index+1}. {obj.text}</p>
-                    })
-                  }
-                </div>
-              </div>
-
-            </div>
-          </div>
+          <OverlayTrigger overlay={tooltip} placement="bottom">
+            <input
+              type='text'
+              onChange={this._onInputChange}
+              style={{height: '2.5em'}}
+              />
+          </OverlayTrigger>
+          <Button type="submit" bsStyle="primary">Submit</Button>
         </form>
+
+        <Modal show={this.state.showModal} onHide={this._closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Tweet Results</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {this.state.data.map((obj, index) => <p key={index}>{index+1}. {obj.text}</p>)}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this._closeModal}>Close</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   }
