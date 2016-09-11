@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
-import Main from './main/main';
+// import Main from './main/main';
+import Main from './home-bak/home';
 
 export default (
   <Router history={browserHistory}>

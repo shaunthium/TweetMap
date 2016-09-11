@@ -6,7 +6,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "Yhaha"
+      text: "Test"
     };
   }
 
@@ -32,8 +32,8 @@ class Home extends React.Component {
           <h3 className="text-muted">ReactJs <i className="fa fa-cog fa-spin"></i></h3>
         </div>
 
-        <div className={`jumbotron ${style.wrapper}`}>
-          <h1>"Allo, "Allo!</h1>
+        <div className={`jumbotron`}>
+          <h1>"Allo, "All!</h1>
           <p className="lead">Always a pleasure scaffolding your apps.</p>
           <p><a className="btn btn-lg btn-success" href="#">Splendid!</a></p>
         </div>
