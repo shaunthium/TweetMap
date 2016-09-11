@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>react-rails-toy-app</title>
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBnIUDgMNt3Jy4ARvdBFMg65u5au6peK1g' %>
-  <%= webpack_css_tag 'main.css' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <%= yield %>
+  <head>
+    <title>react-rails-toy-app</title>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBnIUDgMNt3Jy4ARvdBFMg65u5au6peK1g' %>
+    <%= webpack_css_tag 'main.css' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <p class="notice"><%= notice %></p>
+    <%= yield %>
 
-  <%= webpack_manifest_script %>
-  <%= javascript_include_tag 'modernizr' %>
-  <%= webpack_js_tag 'main.js' %>
-  <%= javascript_include_tag 'application' %>
-</body>
+    <%= webpack_manifest_script %>
+    <%= javascript_include_tag 'modernizr' %>
+    <%= webpack_js_tag 'main.js' %>
+    <%= javascript_include_tag 'application' %>
+  </body>
 </html>
